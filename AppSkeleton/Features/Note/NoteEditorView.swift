@@ -25,7 +25,7 @@ struct NoteEditorView: View {
                         .accessibilityLabel("正文")
                 }
             }
-            .navigationTitle(isCreating ? "新建便签" : "编辑便签")
+            .navigationTitle(isCreating ? "新建记录" : "编辑记录")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

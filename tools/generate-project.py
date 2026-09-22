@@ -6,7 +6,8 @@ from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_NAME = "AppSkeleton"
-BUNDLE_ID = "com.example.appskeleton"
+BUNDLE_ID = "com.qibo.jianji"
+DEVELOPMENT_TEAM = "KXP4HT4M89"
 DEPLOYMENT_TARGET = "18.0"
 
 counter = defaultdict(int)
@@ -475,6 +476,7 @@ APP_SETTINGS = """\t\t\t\tASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
 \t\t\t\tCURRENT_PROJECT_VERSION = 1;
 \t\t\t\tDEVELOPMENT_ASSET_PATHS = "";
+\t\t\t\tDEVELOPMENT_TEAM = %s;
 \t\t\t\tENABLE_DEBUG_DYLIB = NO;
 \t\t\t\tENABLE_PREVIEWS = YES;
 \t\t\t\tGENERATE_INFOPLIST_FILE = NO;
@@ -495,11 +497,12 @@ APP_SETTINGS = """\t\t\t\tASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 \t\t\t\tSWIFT_EMIT_LOC_STRINGS = YES;
 \t\t\t\tSWIFT_VERSION = 6.0;
 \t\t\t\tTARGETED_DEVICE_FAMILY = "1,2";
-""" % (DEPLOYMENT_TARGET, BUNDLE_ID)
+""" % (DEVELOPMENT_TEAM, DEPLOYMENT_TARGET, BUNDLE_ID)
 
 TEST_SETTINGS = """\t\t\t\tBUNDLE_LOADER = "$(TEST_HOST)";
 \t\t\t\tCODE_SIGN_STYLE = Automatic;
 \t\t\t\tCURRENT_PROJECT_VERSION = 1;
+\t\t\t\tDEVELOPMENT_TEAM = %s;
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tIPHONEOS_DEPLOYMENT_TARGET = %s;
 \t\t\t\tMARKETING_VERSION = 0.1.0;
@@ -509,7 +512,7 @@ TEST_SETTINGS = """\t\t\t\tBUNDLE_LOADER = "$(TEST_HOST)";
 \t\t\t\tSWIFT_VERSION = 6.0;
 \t\t\t\tTARGETED_DEVICE_FAMILY = "1,2";
 \t\t\t\tTEST_HOST = "$(BUILT_PRODUCTS_DIR)/%s.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/%s";
-""" % (DEPLOYMENT_TARGET, BUNDLE_ID, PROJECT_NAME, PROJECT_NAME)
+""" % (DEVELOPMENT_TEAM, DEPLOYMENT_TARGET, BUNDLE_ID, PROJECT_NAME, PROJECT_NAME)
 
 
 pbx.append(config(debug_project, "Debug", COMMON_PROJECT))
@@ -517,6 +520,7 @@ pbx.append(config(release_project, "Release", RELEASE_PROJECT))
 pbx.append(config(debug_app, "Debug", APP_SETTINGS))
 pbx.append(config(release_app, "Release", APP_SETTINGS))
 UI_SETTINGS = """\t\t\t\tCODE_SIGN_STYLE = Automatic;
+\t\t\t\tDEVELOPMENT_TEAM = %s;
 \t\t\t\tGENERATE_INFOPLIST_FILE = YES;
 \t\t\t\tIPHONEOS_DEPLOYMENT_TARGET = %s;
 \t\t\t\tPRODUCT_BUNDLE_IDENTIFIER = %s.uitests;
@@ -525,7 +529,7 @@ UI_SETTINGS = """\t\t\t\tCODE_SIGN_STYLE = Automatic;
 \t\t\t\tSWIFT_VERSION = 6.0;
 \t\t\t\tTARGETED_DEVICE_FAMILY = "1,2";
 \t\t\t\tTEST_TARGET_NAME = AppSkeleton;
-""" % (DEPLOYMENT_TARGET, BUNDLE_ID)
+""" % (DEVELOPMENT_TEAM, DEPLOYMENT_TARGET, BUNDLE_ID)
 
 pbx.append(config(debug_ui, "Debug", UI_SETTINGS))
 pbx.append(config(release_ui, "Release", UI_SETTINGS))

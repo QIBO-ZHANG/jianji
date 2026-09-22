@@ -74,8 +74,8 @@ final class ScaffoldSmokeTests: XCTestCase {
     }
 
     func testNoteCreateAndSearch() throws {
-        app.tabBars.buttons["便签"].waitAndTap()
-        app.buttons["新建便签"].waitAndTap()
+        app.tabBars.buttons["记录"].waitAndTap()
+        app.buttons["新建记录"].waitAndTap()
 
         let titleField = app.textFields["标题"]
         XCTAssertTrue(titleField.waitForExistence(timeout: 5), "Editor sheet did not present")
@@ -101,16 +101,20 @@ final class ScaffoldSmokeTests: XCTestCase {
     func testSheetPresentsAndDismisses() throws {
         app.tabBars.buttons["待办"].waitAndTap()
         app.buttons["新建待办"].waitAndTap()
-        XCTAssertTrue(app.navigationBars["新建待办"].waitForExistence(timeout: 5), "Sheet did not present")
 
-        app.buttons["取消"].tap()
+        let titleField = app.textFields["标题"]
+        XCTAssertTrue(titleField.waitForExistence(timeout: 5), "Quick entry sheet did not present")
+
+        // Empty title + send cancels: with the keyboard up the sheet sits
+        // above it, so a downward swipe just re-docks instead of dismissing.
+        app.buttons["保存"].tap()
         let gone = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: app.buttons["保存"])
         wait(for: [gone], timeout: 5)
     }
 
-    /// Wipes SwiftData through the app's own 我的 → 清空全部数据 flow so tests stay repeatable.
+    /// Wipes SwiftData through the app's own 设置 → 清空全部数据 flow so tests stay repeatable.
     nonisolated private func resetData() {
-        app.tabBars.buttons["我的"].waitAndTap(timeout: 15)
+        app.tabBars.buttons["设置"].waitAndTap(timeout: 15)
         let row = app.buttons["清空全部数据"].firstMatch
         guard row.waitForExistence(timeout: 5) else { return }
         row.tap()

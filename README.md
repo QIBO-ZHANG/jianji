@@ -59,5 +59,7 @@ xcrun simctl openurl <UDID> "appskeleton://ledger"
 DEBUG 包还支持 `SKELETON_PREVIEW_TAB` 环境变量（`todo` / `note` / `ledger` / `mine`）指定启动 Tab，便于截图与调试：
 
 ```bash
-xcrun simctl launch <UDID> com.example.appskeleton SKELETON_PREVIEW_TAB=ledger
+SIMCTL_CHILD_SKELETON_PREVIEW_TAB=ledger xcrun simctl launch <UDID> com.qibo.jianji
 ```
+
+注意两点：环境变量必须用 `SIMCTL_CHILD_` 前缀放在调用环境里（`simctl launch` 的尾参是 argv 不是环境）；模拟器窗口不在前台时渲染会被节流，截图可能抓到启动快照，截图前先把设备窗口切到前台。

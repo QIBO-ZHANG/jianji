@@ -96,7 +96,7 @@ struct MineTabRoot: View {
 
     var body: some View {
         NavigationStack(path: router.pathBinding(for: .mine)) {
-            MineView()
+            SettingsView()
                 .navigationDestination(for: AppRoute.self) { RouteDestination(route: $0) }
         }
     }

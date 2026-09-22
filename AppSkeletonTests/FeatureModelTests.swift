@@ -16,6 +16,21 @@ final class FeatureModelTests: XCTestCase {
         XCTAssertNil(item.completedAt)
     }
 
+    func testTodoFlagReminderAndDueDay() {
+        let calendar = Calendar.current
+        let due = Date.now
+
+        let flagged = TodoItem(title: "交房租", dueDate: due, remindAt: due, isFlagged: true)
+        XCTAssertTrue(flagged.isFlagged)
+        XCTAssertNotNil(flagged.remindAt)
+        XCTAssertEqual(flagged.dueDay, calendar.startOfDay(for: due))
+
+        let plain = TodoItem(title: "无日期")
+        XCTAssertFalse(plain.isFlagged)
+        XCTAssertNil(plain.remindAt)
+        XCTAssertNil(plain.dueDay)
+    }
+
     func testLedgerCategoriesSplitByKind() {
         XCTAssertEqual(LedgerCategory.cases(for: .income).map(\.rawValue), ["salary", "bonus", "investment"])
         XCTAssertTrue(LedgerCategory.cases(for: .expense).contains(.dining))

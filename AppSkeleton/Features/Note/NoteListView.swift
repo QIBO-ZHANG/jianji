@@ -7,8 +7,9 @@ struct NoteListView: View {
 
     var body: some View {
         NoteResultsView(search: search)
+            .background(Theme.Palette.background.ignoresSafeArea())
             .navigationTitle(AppTab.note.title)
-            .searchable(text: $search, prompt: "搜索便签")
+            .searchable(text: $search, prompt: "搜索记录")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -16,7 +17,7 @@ struct NoteListView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-                    .accessibilityLabel("新建便签")
+                    .accessibilityLabel("新建记录")
                 }
             }
     }
@@ -48,8 +49,8 @@ private struct NoteResultsView: View {
             if notes.isEmpty {
                 if search.isEmpty {
                     ContentUnavailableView(
-                        "暂无便签",
-                        systemImage: "note.text",
+                        "暂无记录",
+                        systemImage: "pencil.and.scribble",
                         description: Text("点右上角 + 写点什么")
                     )
                 } else {
@@ -59,6 +60,7 @@ private struct NoteResultsView: View {
                 List {
                     ForEach(notes) { note in
                         NoteRow(note: note)
+                            .listRowBackground(Theme.Palette.surface)
                             .swipeActions(edge: .trailing) {
                                 Button(role: .destructive) {
                                     context.delete(note)
@@ -68,6 +70,7 @@ private struct NoteResultsView: View {
                             }
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
         }
     }

@@ -36,6 +36,7 @@ struct LedgerListView: View {
                     Section(group.day.formatted(.dateTime.month().day().weekday())) {
                         ForEach(group.entries) { entry in
                             LedgerRow(entry: entry)
+                                .listRowBackground(Theme.Palette.surface)
                                 .swipeActions(edge: .trailing) {
                                     Button(role: .destructive) {
                                         context.delete(entry)
@@ -49,6 +50,8 @@ struct LedgerListView: View {
             }
         }
         .navigationTitle(AppTab.ledger.title)
+        .scrollContentBackground(.hidden)
+        .background(Theme.Palette.background.ignoresSafeArea())
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

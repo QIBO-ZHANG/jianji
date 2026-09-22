@@ -13,18 +13,18 @@ enum AppTab: String, CaseIterable, Identifiable, Sendable {
     var title: String {
         switch self {
         case .todo: "待办"
-        case .note: "便签"
+        case .note: "记录"
         case .ledger: "记账"
-        case .mine: "我的"
+        case .mine: "设置"
         }
     }
 
     var systemImage: String {
         switch self {
-        case .todo: "checklist"
-        case .note: "note.text"
+        case .todo: "checkmark"
+        case .note: "pencil.and.scribble"
         case .ledger: "yensign.circle"
-        case .mine: "person.crop.circle"
+        case .mine: "gearshape"
         }
     }
 }
